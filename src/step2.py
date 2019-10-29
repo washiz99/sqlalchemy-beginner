@@ -1,18 +1,16 @@
 """
-step2: insert/update/delete
+step1: execute query
 """
 from sqlalchemy import create_engine
-from sqlalchemy.sql import text
 
 # connect database
 conn_string = 'mysql+pymysql://root:mysql@127.0.0.1:3306/world'
 e = create_engine(conn_string)
 
-statement = """
-    insert into city
-        (Name, CountryCode, District, Population)
-    values
-        (:name, :countryCode, :district, :population)
-"""
+# In pymysql, '%s' is used as a placeholder for query parameter.
+query = 'select * from city where CountryCode = %s and Population >= %s;'
+# Both integer and strins can be used.
+result = e.execute(query, 'JPN', 1000000)
 
-e.execute(text(statement), name='Namagahama', countryCode='JPN', district='Shiga', population=126587)
+for row in result:
+    print(row)
