@@ -1,5 +1,5 @@
 """
-step2: insert/update/delete
+step3: insert/update/delete
 """
 from sqlalchemy import create_engine
 from sqlalchemy.sql import text
@@ -16,3 +16,7 @@ statement = """
 """
 
 e.execute(text(statement), name='Namagahama', countryCode='JPN', district='Shiga', population=126587)
+
+result = e.execute("select * from city where Name = 'Namagahama';")
+for row in result:
+    print(row)
