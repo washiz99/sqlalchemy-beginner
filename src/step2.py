@@ -15,7 +15,7 @@ result = e.execute(query, 'JPN', 1000000)
 for row in result:
     print(row)
 
-# :name
+# use :valiable
 query2 = 'select * from city where CountryCode = :countryCode and Population >= :population;'
 result2 = e.execute(text(query2), countryCode='USA', population=1000000)
 for row2 in result2:
